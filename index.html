@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#ff66b2">
   <style>
     body {
-      background-color: #ffb6c1; /* Rosa claro */
+      background-color: #ffb6c1; 
       font-family: Arial, sans-serif;
       text-align: center;
       padding: 40px;
@@ -27,30 +27,49 @@
       border-radius: 8px;
       cursor: pointer;
       font-size: 16px;
+      margin: 10px;
       transition: 0.3s;
     }
 
     button:hover {
       background-color: #ff4da6;
     }
+
+    p {
+      font-size: 18px;
+    }
   </style>
 </head>
 <body>
-  <h1>💖 Bienvenida a tu PWA</h1>
-  <p>Has iniciado sesión correctamente.</p>
+  <h1>💖 Bienvenidos a mi PWA</h1>
+  <p id="estado"></p>
 
-  <button onclick="logout()">Cerrar sesión</button>
+  <div id="acciones">
+    <button id="loginBtn" onclick="irLogin()">Iniciar sesión</button>
+    <button id="logoutBtn" onclick="logout()">Cerrar sesión</button>
+  </div>
 
   <script>
-    // Si no está logueado, redirige al login
-    if (localStorage.getItem("logueado") !== "true") {
+    const estadoTexto = document.getElementById("estado");
+    const loginBtn = document.getElementById("loginBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    // estadio del usuario
+    if (localStorage.getItem("logueado") === "true") {
+      estadoTexto.textContent = "Ya has iniciado sesión 💫";
+      loginBtn.style.display = "none";
+    } else {
+      estadoTexto.textContent = "Aún no has iniciado sesión 🌸";
+      logoutBtn.style.display = "none";
+    }
+
+    function irLogin() {
       window.location.href = "login.html";
     }
 
-    // Función para cerrar sesión
     function logout() {
       localStorage.removeItem("logueado");
-      window.location.href = "login.html";
+      window.location.reload();
     }
   </script>
 </body>
