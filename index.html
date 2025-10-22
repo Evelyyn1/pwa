@@ -3,34 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi primera PWA</title>
-
-  <!-- Manifest -->
+  <title>Inicio - Mi PWA</title>
   <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ff66b2">
+  <style>
+    body {
+      background-color: #ffb6c1; /* Rosa claro */
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      color: #333;
+    }
 
-  <!-- Color de la barra en móviles -->
-  <meta name="theme-color" content="#ff0000">
+    h1 {
+      color: #d63384;
+    }
 
-  <!-- Icono -->
-  <link rel="icon" href="icons/icon-192x192.png">
+    button {
+      background-color: #d63384;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #ff4da6;
+    }
+  </style>
 </head>
 <body>
-  <h1>Bienvenido a mi PWA</h1>
-  <p>Se puede instalar como aplicación en tu celular</p>
+  <h1>💖 Bienvenida a tu PWA</h1>
+  <p>Has iniciado sesión correctamente.</p>
 
-  <button onclick="alert('Hola desde la PWA')">Click aquí</button>
-
-  <ul>
-    <li><a href="index.html">Inicio</a></li>
-    <li><a href="login.html">Login</a></li>
-  </ul>
+  <button onclick="logout()">Cerrar sesión</button>
 
   <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker
-        .register("service-worker.js")
-        .then(() => console.log("Service Worker registrado correctamente"))
-        .catch(err => console.error("Error al registrar el Service Worker:", err));
+    // Si no está logueado, redirige al login
+    if (localStorage.getItem("logueado") !== "true") {
+      window.location.href = "login.html";
+    }
+
+    // Función para cerrar sesión
+    function logout() {
+      localStorage.removeItem("logueado");
+      window.location.href = "login.html";
     }
   </script>
 </body>
